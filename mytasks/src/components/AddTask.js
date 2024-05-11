@@ -16,7 +16,7 @@ export const AddTask = ({taskList, setTaskList, task, setTask}) => {
             }
             setTaskList([...taskList, newTask]);
         }
-        e.target.task.value = ""
+        setTask({});
     }
 
     return (
@@ -25,12 +25,12 @@ export const AddTask = ({taskList, setTaskList, task, setTask}) => {
             <input 
                 type="text" 
                 name="task" 
-                value={task.name}
+                value={task.name || ""}
                 onChange={e=> setTask({...task, name: e.target.value})}
                 autoComplete="off" 
                 placeholder="Add task" 
                 maxLength="25"/>
-            <button>Add</button>
+            <button>{task.id ? "Update" : "Add"}</button>
         </form>
        </section>
     )
