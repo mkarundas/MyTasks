@@ -1,4 +1,15 @@
-export const ShowTask = ({taskList, setTaskList}) => {
+export const ShowTask = ({taskList, setTaskList, task, setTask}) => {
+
+    const handleEdit = (id) => {
+        const selectedTask = taskList.find(todo => todo.id === id);
+        setTask(selectedTask);
+    }
+
+    const handleDelete = (id) => {
+        const updatedTaskList = taskList.filter(todo => todo.id !== id);
+        setTaskList(updatedTaskList);
+    }
+
     return (
         <section className="showTask">
             <div className="head">
@@ -9,13 +20,13 @@ export const ShowTask = ({taskList, setTaskList}) => {
                 <button className="clear" onClick={()=> setTaskList([])}>Clear</button>
             </div>
             <ul>
-                 {taskList.map((task) => (<li key={task.id}>
+                 {taskList.map((todo) => (<li key={todo.id}>
                     <p>
-                        <span>{task.name}</span>
-                        <span>{task.time}</span>
+                        <span>{todo.name}</span>
+                        <span>{todo.time}</span>
                     </p>
-                    <i className="bi bi-pencil-square"></i>
-                    <i className="bi bi-trash"></i>
+                    <i onClick={() => handleEdit(todo.id)} className="bi bi-pencil-square"></i>
+                    <i onClick={() => handleDelete(todo.id)}className="bi bi-trash"></i>
                 </li>
                  )
                  )}
